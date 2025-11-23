@@ -14,6 +14,7 @@ Trước khi bắt đầu, bạn cần có:
 1.  **Một VPS Ubuntu** (20.04 hoặc 22.04). RAM tối thiểu 1GB.
 2.  **Một Tên miền (Domain)**. Ví dụ: `vivi.cuaban.com`.
     *   *Vào trang quản lý tên miền, trỏ bản ghi **A** về **địa chỉ IP** của VPS.*
+3.  **Mã nguồn trên GitHub**: Hãy đảm bảo bạn đã đẩy (push) toàn bộ code này lên một Repository công khai hoặc riêng tư trên GitHub.
 
 ---
 
@@ -21,14 +22,14 @@ Trước khi bắt đầu, bạn cần có:
 
 Hãy đăng nhập vào VPS của bạn qua SSH và thực hiện lần lượt các bước sau.
 
-### Bước 1: Cài đặt Docker & Môi trường
+### Bước 1: Cài đặt Docker & Git
 *(Copy cả đoạn lệnh dưới và dán vào terminal)*
 
 ```bash
 # Cập nhật hệ thống
 sudo apt update && sudo apt upgrade -y
 
-# Cài đặt Docker và các công cụ cần thiết
+# Cài đặt Docker, Git và các công cụ cần thiết
 sudo apt install -y apt-transport-https ca-certificates curl software-properties-common nginx certbot python3-certbot-nginx git
 
 # Cài đặt Docker Engine
@@ -38,27 +39,29 @@ sudo apt update
 sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 ```
 
-### Bước 2: Tải mã nguồn về
-Bạn có thể upload file từ máy tính lên, hoặc nếu bạn dùng git:
+### Bước 2: Tải mã nguồn từ GitHub
+Thay vì upload thủ công, chúng ta sẽ kéo code trực tiếp từ GitHub về.
+
+1.  **Copy link GitHub** của dự án này (Ví dụ: `https://github.com/username/vivi-assistant.git`).
+2.  Chạy lệnh sau trên VPS:
 
 ```bash
-# Di chuyển ra thư mục gốc
+# Di chuyển ra thư mục web
 cd /var/www
 
-# Clone code về (Thay link này bằng link git của bạn nếu có, hoặc tạo thư mục thủ công)
-# Ở đây ta giả sử bạn tạo thư mục và upload file vào:
-sudo mkdir vivi-assistant
-cd vivi-assistant
+# --- LỆNH QUAN TRỌNG: KÉO CODE VỀ ---
+# Thay đường dẫn https://... bằng link GitHub thực tế của bạn
+sudo git clone https://github.com/YOUR_GITHUB_USERNAME/vivi-assistant.git
 
-# --- LÚC NÀY HÃY UPLOAD TOÀN BỘ FILE CODE VÀO THƯ MỤC NÀY ---
-# (Dùng FileZilla hoặc WinSCP để upload)
+# Truy cập vào thư mục vừa tải
+cd vivi-assistant
 ```
 
 ### Bước 3: Chạy ứng dụng ViVi
-Sau khi đã upload file đầy đủ vào `/var/www/vivi-assistant`:
+Sau khi đã vào thư mục dự án (`/var/www/vivi-assistant`):
 
 ```bash
-# Chạy Docker (App sẽ chạy ở cổng 3000)
+# Chạy Docker (App sẽ tự động build và chạy ở cổng 3000)
 sudo docker compose up -d --build
 ```
 *Đợi khoảng 2-3 phút để quá trình build hoàn tất.*
@@ -136,12 +139,13 @@ Bây giờ hãy mở trình duyệt và truy cập: `https://vivi.cuaban.com`
 **1. Tôi lấy Gemini API Key ở đâu?**
 Truy cập: [Google AI Studio](https://aistudio.google.com/app/apikey) để lấy miễn phí.
 
-**2. Làm sao để cập nhật phiên bản mới?**
-Chỉ cần upload code mới đè lên code cũ, sau đó chạy lệnh:
+**2. Làm sao để cập nhật code mới từ GitHub?**
+Khi bạn có thay đổi code và đã push lên GitHub, chỉ cần chạy lệnh sau trên VPS:
 ```bash
 cd /var/www/vivi-assistant
-sudo docker compose down
-sudo docker compose up -d --build
+sudo git pull origin main  # Kéo code mới về
+sudo docker compose down   # Tắt app cũ
+sudo docker compose up -d --build # Build lại app mới
 ```
 
 **3. Xem log lỗi nếu App không chạy?**
