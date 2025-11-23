@@ -8,6 +8,10 @@ export default defineConfig({
     port: 3000,
     host: true
   },
+  define: {
+    // This prevents "process is not defined" error when using process.env.API_KEY
+    'process.env': {}
+  },
   build: {
     outDir: 'dist',
     sourcemap: false

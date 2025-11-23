@@ -11,6 +11,7 @@
     <title>ViVi AI Assistant</title>
     <link rel="manifest" href="/manifest.json" />
     
+    <!-- Using CDN for Tailwind to keep setup simple without postcss config files -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -71,10 +72,10 @@
   <script type="importmap">
 {
   "imports": {
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
-    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
     "react/": "https://aistudiocdn.com/react@^19.2.0/",
     "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
     "vite": "https://aistudiocdn.com/vite@^7.2.4",
     "@vitejs/plugin-react": "https://aistudiocdn.com/@vitejs/plugin-react@^5.1.1"
   }
@@ -83,5 +84,7 @@
 </head>
   <body class="bg-slate-900 text-white overflow-hidden select-none touch-manipulation">
     <div id="root"></div>
+    <!-- THIS IS THE MISSING LINK THAT CAUSED THE ERROR -->
+    <script type="module" src="/index.tsx"></script>
   </body>
 </html>
