@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  vivi-app:
+    container_name: vivi_assistant
+    build: .
+    restart: always
+    ports:
+      - "80:80"
+    environment:
+      - NODE_ENV=production
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1G
