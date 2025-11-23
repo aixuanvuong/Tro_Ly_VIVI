@@ -178,7 +178,7 @@ vivi-assistant/
 
 *   **Chương Xuân Vương**
 *   Email: chuongxuanvuong@gmail.com
-*   Facebook: [xuanvuongtv](https://www.facebook.com/xuanvuongtv)
+*   Facebook: [Chương Xuân Vương](https://www.facebook.com/xuanvuongtv)
 
 ---
 
