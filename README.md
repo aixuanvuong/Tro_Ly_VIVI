@@ -1,93 +1,88 @@
-# 🤖 Hướng dẫn Cài đặt ViVi Assistant (A-Z)
+# 🤖 Hướng dẫn Cài đặt Siêu Trợ Lý ViVi (A-Z)
 
-Chào mừng bạn! Tài liệu này được thiết kế để giúp bạn đưa **Siêu trợ lý ViVi** lên máy chủ (VPS Ubuntu) một cách dễ dàng nhất.
+Chào mừng bạn! Tài liệu này được viết dành riêng cho người mới bắt đầu. Bạn chỉ cần làm theo từng bước, **Copy** và **Paste** các lệnh dưới đây vào Server (VPS) là sẽ có ngay một trợ lý ảo riêng.
 
 > **⚠️ LƯU Ý QUAN TRỌNG:**
-> Để sử dụng được **Microphone** trên điện thoại/máy tính, trang web của bạn **BẮT BUỘC PHẢI CÓ HTTPS** (ổ khóa bảo mật).
-> Hướng dẫn này sẽ giúp bạn cài đặt HTTPS miễn phí hoàn toàn.
+> Để ViVi nghe được giọng nói của bạn, trang web **BẮT BUỘC PHẢI CÓ HTTPS** (biểu tượng ổ khóa trên trình duyệt).
+> Đừng lo, hướng dẫn này sẽ giúp bạn cài HTTPS hoàn toàn miễn phí.
 
 ---
 
-## 📋 Phần 1: Chuẩn bị
+## 📋 Phần 1: Những thứ cần chuẩn bị
 
-Trước khi bắt đầu, bạn cần có:
-1.  **Một VPS Ubuntu** (20.04 hoặc 22.04). RAM tối thiểu 1GB.
-2.  **Một Tên miền (Domain)**. Ví dụ: `vivi.cuaban.com`.
-    *   *Vào trang quản lý tên miền, trỏ bản ghi **A** về **địa chỉ IP** của VPS.*
-3.  **Mã nguồn trên GitHub**: Hãy đảm bảo bạn đã đẩy (push) toàn bộ code này lên một Repository công khai hoặc riêng tư trên GitHub.
+1.  **Một VPS (Máy chủ ảo)**: Nên dùng hệ điều hành **Ubuntu 20.04** hoặc **22.04**.
+2.  **Một Tên miền (Domain)**: Ví dụ `troly.tenmiencuaban.com`.
+    *   *Hãy vào trang quản lý tên miền và trỏ nó về địa chỉ IP của VPS trước khi bắt đầu.*
 
 ---
 
-## 🛠️ Phần 2: Cài đặt trên Server (Copy & Paste)
+## 🛠️ Phần 2: Cài đặt trên Server (Chỉ cần Copy & Paste)
 
-Hãy đăng nhập vào VPS của bạn qua SSH và thực hiện lần lượt các bước sau.
+Hãy đăng nhập vào VPS của bạn và thực hiện lần lượt:
 
-### Bước 1: Cài đặt Docker & Git
-*(Copy cả đoạn lệnh dưới và dán vào terminal)*
+### Bước 1: Cài đặt các công cụ cần thiết
+Copy toàn bộ đoạn dưới đây và dán vào cửa sổ lệnh (Terminal) rồi nhấn Enter:
 
 ```bash
-# Cập nhật hệ thống
+# 1. Cập nhật hệ thống mới nhất
 sudo apt update && sudo apt upgrade -y
 
-# Cài đặt Docker, Git và các công cụ cần thiết
+# 2. Cài đặt Docker, Git và Nginx
 sudo apt install -y apt-transport-https ca-certificates curl software-properties-common nginx certbot python3-certbot-nginx git
 
-# Cài đặt Docker Engine
+# 3. Cài đặt Docker Engine (Bộ máy chạy ứng dụng)
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 sudo apt update
 sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 ```
 
-### Bước 2: Tải mã nguồn từ GitHub
-Thay vì upload thủ công, chúng ta sẽ kéo code trực tiếp từ GitHub về.
-
-1.  **Copy link GitHub** của dự án này (Ví dụ: `https://github.com/username/vivi-assistant.git`).
-2.  Chạy lệnh sau trên VPS:
+### Bước 2: Tải mã nguồn ViVi về máy
+Sử dụng đường dẫn GitHub chính thức của dự án:
 
 ```bash
 # Di chuyển ra thư mục web
 cd /var/www
 
-# --- LỆNH QUAN TRỌNG: KÉO CODE VỀ ---
-# Thay đường dẫn https://... bằng link GitHub thực tế của bạn
-sudo git clone https://github.com/YOUR_GITHUB_USERNAME/vivi-assistant.git
+# Kéo mã nguồn về từ GitHub
+sudo git clone https://github.com/aixuanvuong/Tro_Ly_VIVI.git
 
 # Truy cập vào thư mục vừa tải
-cd vivi-assistant
+cd Tro_Ly_VIVI
 ```
 
-### Bước 3: Chạy ứng dụng ViVi
-Sau khi đã vào thư mục dự án (`/var/www/vivi-assistant`):
+### Bước 3: Khởi động ViVi
+Lệnh này sẽ tự động cài đặt mọi thứ và chạy ứng dụng:
 
 ```bash
-# Chạy Docker (App sẽ tự động build và chạy ở cổng 3000)
 sudo docker compose up -d --build
 ```
-*Đợi khoảng 2-3 phút để quá trình build hoàn tất.*
+*Hãy đi pha một tách cà phê ☕ và đợi khoảng 2-3 phút để máy chủ làm việc xong.*
 
 ---
 
-## 🌐 Phần 3: Cấu hình Tên miền & HTTPS (Quan trọng nhất)
+## 🌐 Phần 3: Kết nối Tên miền & Bảo mật (HTTPS)
 
-Đây là bước giúp bạn có ổ khóa bảo mật 🔒 để dùng được Micro.
+Đây là bước quan trọng nhất để kích hoạt tính năng Micro.
 
-### Bước 1: Tạo file cấu hình Nginx
-Thay `vivi.cuaban.com` bằng tên miền thực tế của bạn.
+### Bước 1: Tạo cấu hình kết nối
+Hãy thay đổi `tenmiencuaban.com` bằng tên miền thực tế của bạn trong lệnh dưới.
 
+1.  Mở trình soạn thảo:
 ```bash
-# Tạo file cấu hình mới
 sudo nano /etc/nginx/sites-available/vivi
 ```
 
-**Dán nội dung sau vào (Nhớ sửa tên miền):**
+2.  **Copy đoạn dưới đây**, dán vào cửa sổ lệnh.
+    **QUAN TRỌNG:** Sửa dòng `server_name` thành tên miền của bạn.
 
 ```nginx
 server {
-    server_name vivi.cuaban.com; # <--- THAY TÊN MIỀN CỦA BẠN VÀO ĐÂY
+    # THAY TÊN MIỀN CỦA BẠN Ở DÒNG DƯỚI (Ví dụ: troly.abc.com)
+    server_name tenmiencuaban.com;
 
     location / {
-        proxy_pass http://localhost:3000; # Trỏ vào Docker App đang chạy
+        proxy_pass http://localhost:3000; # Kết nối tới ViVi đang chạy
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection 'upgrade';
@@ -97,61 +92,60 @@ server {
 }
 ```
 
-Bấm `Ctrl+O` -> `Enter` để lưu. Bấm `Ctrl+X` để thoát.
+3.  Lưu lại bằng cách bấm: `Ctrl+O` -> `Enter` -> `Ctrl+X`.
 
-### Bước 2: Kích hoạt Web
+### Bước 2: Kích hoạt và lấy chứng chỉ bảo mật
+Copy lần lượt các dòng sau:
+
 ```bash
-# Tạo liên kết
+# Kích hoạt cấu hình vừa tạo
 sudo ln -s /etc/nginx/sites-available/vivi /etc/nginx/sites-enabled/
-# Xóa cấu hình mặc định (nếu có)
+
+# Xóa cấu hình mặc định để tránh lỗi
 sudo rm /etc/nginx/sites-enabled/default
-# Kiểm tra lỗi
-sudo nginx -t
-# Khởi động lại Nginx
+
+# Khởi động lại hệ thống mạng
 sudo systemctl restart nginx
-```
 
-### Bước 3: Cài đặt SSL (HTTPS) Tự động
-Chạy lệnh thần thánh sau của Certbot:
-
-```bash
-sudo certbot --nginx -d vivi.cuaban.com
+# --- CÀI ĐẶT Ổ KHÓA BẢO MẬT (SSL) ---
+# Thay tenmiencuaban.com bằng tên miền của bạn
+sudo certbot --nginx -d tenmiencuaban.com
 ```
-*   Nó sẽ hỏi email -> Nhập email của bạn.
-*   Hỏi đồng ý điều khoản -> Chọn `Y`.
-*   Nó sẽ tự động cài chứng chỉ bảo mật.
+*Máy sẽ hỏi Email của bạn (để thông báo nếu chứng chỉ hết hạn), hãy nhập email vào. Sau đó chọn Y (Yes) nếu được hỏi.*
 
 ---
 
-## ✅ Hoàn tất!
+## ✅ Hoàn tất! Chúc mừng bạn
 
-Bây giờ hãy mở trình duyệt và truy cập: `https://vivi.cuaban.com`
+Bây giờ hãy mở trình duyệt (Chrome/Safari) trên điện thoại hoặc máy tính và vào địa chỉ:
+`https://tenmiencuaban.com`
 
-1.  Bạn sẽ thấy giao diện ViVi.
-2.  Vào **Cài đặt** -> **Hệ thống**.
-3.  Nhập **Gemini API Key** của bạn vào và Lưu.
-4.  Bắt đầu trò chuyện!
-
----
-
-## ❓ Các câu hỏi thường gặp
-
-**1. Tôi lấy Gemini API Key ở đâu?**
-Truy cập: [Google AI Studio](https://aistudio.google.com/app/apikey) để lấy miễn phí.
-
-**2. Làm sao để cập nhật code mới từ GitHub?**
-Khi bạn có thay đổi code và đã push lên GitHub, chỉ cần chạy lệnh sau trên VPS:
-```bash
-cd /var/www/vivi-assistant
-sudo git pull origin main  # Kéo code mới về
-sudo docker compose down   # Tắt app cũ
-sudo docker compose up -d --build # Build lại app mới
-```
-
-**3. Xem log lỗi nếu App không chạy?**
-```bash
-sudo docker logs -f vivi_assistant
-```
+**Các bước thiết lập đầu tiên:**
+1.  Bấm nút **"Bắt đầu"** ở màn hình chào mừng.
+2.  Ứng dụng sẽ tự mở phần **Cài đặt -> Hệ thống**.
+3.  Bấm vào link hướng dẫn lấy **Gemini API Key** (Miễn phí).
+4.  Nhập Key vào và bấm **Lưu**.
+5.  Xong! Bạn có thể bắt đầu nói chuyện với ViVi.
 
 ---
-© 2025 Chương Xuân Vương
+
+## ❓ Hướng dẫn cập nhật
+
+Sau này khi tác giả cập nhật tính năng mới, bạn chỉ cần làm như sau để nâng cấp server của mình:
+
+```bash
+cd /var/www/Tro_Ly_VIVI
+
+# 1. Lấy code mới nhất về
+sudo git pull origin main
+
+# 2. Chạy lại ứng dụng
+sudo docker compose down
+sudo docker compose up -d --build
+```
+
+---
+**Thông tin liên hệ & Hỗ trợ:**
+*   Email: chuongxuanvuong@gmail.com
+*   Facebook: xuanvuongtv
+*   © 2025 Chương Xuân Vương
