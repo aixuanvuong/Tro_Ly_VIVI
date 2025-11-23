@@ -188,4 +188,4 @@ Nếu bạn thấy dự án thú vị, hãy ủng hộ tác giả:
 *   **Vietcombank**: 9906802199 (xuanvuongtv)
 *   **MoMo / ZaloPay**: 0906802199
 
-© 2025 ViVi Project. Built with ❤️ & Gemini.
+© 2025 Xuân Vương.
