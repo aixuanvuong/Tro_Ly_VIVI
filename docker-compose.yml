@@ -6,9 +6,11 @@ services:
     build: .
     restart: always
     ports:
-      - "80:80"
+      - "3000:80"
     environment:
       - NODE_ENV=production
+      # Nếu bạn muốn gán cứng API Key (không khuyến khích), bỏ comment dòng dưới:
+      # - API_KEY=AIzaSy...
     deploy:
       resources:
         limits:
