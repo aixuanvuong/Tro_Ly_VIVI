@@ -14,7 +14,6 @@ Trước khi bắt đầu, bạn cần có:
 1.  **Một VPS Ubuntu** (20.04 hoặc 22.04). RAM tối thiểu 1GB.
 2.  **Một Tên miền (Domain)**. Ví dụ: `vivi.cuaban.com`.
     *   *Vào trang quản lý tên miền, trỏ bản ghi **A** về **địa chỉ IP** của VPS.*
-3.  **Mã nguồn trên GitHub**: Hãy đảm bảo bạn đã đẩy (push) toàn bộ code này lên một Repository công khai hoặc riêng tư trên GitHub.
 
 ---
 
@@ -40,25 +39,21 @@ sudo apt install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
 ```
 
 ### Bước 2: Tải mã nguồn từ GitHub
-Thay vì upload thủ công, chúng ta sẽ kéo code trực tiếp từ GitHub về.
-
-1.  **Copy link GitHub** của dự án này (Ví dụ: `https://github.com/username/vivi-assistant.git`).
-2.  Chạy lệnh sau trên VPS:
+Chạy lệnh sau để kéo toàn bộ mã nguồn về máy chủ:
 
 ```bash
 # Di chuyển ra thư mục web
 cd /var/www
 
 # --- LỆNH QUAN TRỌNG: KÉO CODE VỀ ---
-# Thay đường dẫn https://... bằng link GitHub thực tế của bạn
-sudo git clone https://github.com/YOUR_GITHUB_USERNAME/vivi-assistant.git
+sudo git clone https://github.com/aixuanvuong/Tro_Ly_VIVI.git
 
 # Truy cập vào thư mục vừa tải
-cd vivi-assistant
+cd Tro_Ly_VIVI
 ```
 
 ### Bước 3: Chạy ứng dụng ViVi
-Sau khi đã vào thư mục dự án (`/var/www/vivi-assistant`):
+Sau khi đã vào thư mục dự án (`/var/www/Tro_Ly_VIVI`):
 
 ```bash
 # Chạy Docker (App sẽ tự động build và chạy ở cổng 3000)
@@ -140,9 +135,9 @@ Bây giờ hãy mở trình duyệt và truy cập: `https://vivi.cuaban.com`
 Truy cập: [Google AI Studio](https://aistudio.google.com/app/apikey) để lấy miễn phí.
 
 **2. Làm sao để cập nhật code mới từ GitHub?**
-Khi bạn có thay đổi code và đã push lên GitHub, chỉ cần chạy lệnh sau trên VPS:
+Khi dự án có cập nhật mới, bạn chỉ cần chạy lệnh sau trên VPS:
 ```bash
-cd /var/www/vivi-assistant
+cd /var/www/Tro_Ly_VIVI
 sudo git pull origin main  # Kéo code mới về
 sudo docker compose down   # Tắt app cũ
 sudo docker compose up -d --build # Build lại app mới
