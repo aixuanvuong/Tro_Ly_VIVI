@@ -1,0 +1,17 @@
+{
+  "short_name": "ViVi AI",
+  "name": "Siêu Trợ Lý ViVi",
+  "description": "Trợ lý ảo AI thông minh, giao tiếp tự nhiên với giao diện cảm xúc.",
+  "icons": [
+    {
+      "src": "https://api.iconify.design/fluent-emoji-flat:robot.svg",
+      "type": "image/svg+xml",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#0f172a",
+  "background_color": "#0f172a",
+  "orientation": "portrait-primary"
+}

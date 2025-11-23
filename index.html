@@ -1,9 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ViVi Assistant</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="theme-color" content="#0f172a" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="description" content="ViVi - Siêu trợ lý ảo AI thông minh" />
+    
+    <title>ViVi AI Assistant</title>
+    <link rel="manifest" href="/manifest.json" />
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -45,6 +52,21 @@
           -ms-overflow-style: none;  /* IE and Edge */
           scrollbar-width: none;  /* Firefox */
       }
+      /* Custom scrollbar for settings/chat */
+      .custom-scrollbar::-webkit-scrollbar {
+          width: 6px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-track {
+          background: rgba(255, 255, 255, 0.05);
+          border-radius: 10px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: rgba(255, 255, 255, 0.2);
+          border-radius: 10px;
+      }
+      .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+          background: rgba(255, 255, 255, 0.3);
+      }
     </style>
   <script type="importmap">
 {
@@ -57,7 +79,7 @@
 }
 </script>
 </head>
-  <body class="bg-slate-900 text-white overflow-hidden">
+  <body class="bg-slate-900 text-white overflow-hidden select-none touch-manipulation">
     <div id="root"></div>
   </body>
 </html>
