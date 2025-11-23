@@ -1,0 +1,7 @@
+{
+  "name": "ViVi Assistant Prototype",
+  "description": "A voice assistant prototype demonstrating Gemini integration, command parsing, and speech synthesis for Android architecture simulation.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
